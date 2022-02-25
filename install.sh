@@ -5,7 +5,7 @@
 
 # HOW TO RUN THE SCRIPT
 
-# sudo wget -q -O - https://raw.githubusercontent.com/BobbySlope/touchscreen_hoobs/main/install_script.sh | sudo bash -
+# sudo wget -q -O - https://raw.githubusercontent.com/BobbySlope/touchscreen_hoobs/main/install.sh | sudo bash -
 
 
 
