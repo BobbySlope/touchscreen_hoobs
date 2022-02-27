@@ -45,53 +45,60 @@ echo "----------------------------------------------------------------"
 echo "Touchscreen Installed"
 echo "----------------------------------------------------------------"
 
-#echo "set screen...."
-#sudo rm -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-#cat > /usr/share/X11/xorg.conf.d/99-fbturbo.conf <<EOL
-#Section "InputClass"
-#   Identifier "calibration"
-#   MatchProduct "ADS7846 Touchscreen"
-#   # Hat trick to get the pen to work properly on the touch screen, rotate 90 degrees clockwise:
-#   Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
-#   # Touch screen rotation by 90deg
-#   #Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
-#   # Don't use libinput but evdev for the touch screen and the pen so calibration works:
-#   Driver "evdev"
-#   Option "Calibration"   "3936 227 268 3880"
-#   Option "InvertY" "true"
-# #  #Option "InvertX" "true"
-# #  # Right mouse button is long press with pen:
-#   Option "EmulateThirdButton" "1"
-#   Option "EmulateThirdButtonTimeout" "750"
-#   Option "EmulateThirdButtonMoveThreshold" "30"
-#EndSection
-#
-#Section "Device"
-#   # WaveShare SpotPear 3.5", framebuffer 1
-#   Identifier "uga"
-#   driver "fbdev"
-#   # Switch to /dev/fb0 for default output (usually hdmi)
-#   Option "fbdev" "/dev/fb1"
-#   Option "ShadowFB" "off"
-#EndSection
-#
-#Section "Monitor"
-#   # Primary monitor. WaveShare SpotPear 480x320
-#   Identifier "WSSP"
-#EndSection
-#
-#Section "Screen"
-#   Identifier "primary"
-#   Device "uga"
-#   Monitor "WSSP"
-#EndSection
-#
-#Section "ServerLayout"
-#   Identifier "default"
-#   Screen 0 "primary"
-#EndSection
-#EOL
+echo "set screen...."
+sudo rm -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+cat > /usr/share/X11/xorg.conf.d/99-fbturbo.conf <<EOL
+Section "InputClass"
+   Identifier "calibration"
+   MatchProduct "ADS7846 Touchscreen"
+   # Hat trick to get the pen to work properly on the touch screen, rotate 90 degrees clockwise:
+   Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
+   # Touch screen rotation by 90deg
+   #Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
+   # Don't use libinput but evdev for the touch screen and the pen so calibration works:
+   Driver "evdev"
+   Option "Calibration"   "3936 227 268 3880"
+   Option "InvertY" "true"
+ #  #Option "InvertX" "true"
+ #  # Right mouse button is long press with pen:
+   Option "EmulateThirdButton" "1"
+   Option "EmulateThirdButtonTimeout" "750"
+   Option "EmulateThirdButtonMoveThreshold" "30"
+EndSection
 
+Section "Device"
+   # WaveShare SpotPear 3.5", framebuffer 1
+   Identifier "uga"
+   driver "fbdev"
+   # Switch to /dev/fb0 for default output (usually hdmi)
+   Option "fbdev" "/dev/fb1"
+   Option "ShadowFB" "off"
+EndSection
+
+Section "Monitor"
+   # Primary monitor. WaveShare SpotPear 480x320
+   Identifier "WSSP"
+EndSection
+
+Section "Screen"
+   Identifier "primary"
+   Device "uga"
+   Monitor "WSSP"
+EndSection
+
+Section "ServerLayout"
+   Identifier "default"
+   Screen 0 "primary"
+EndSection
+EOL
+
+sudo rm -rf /etc/modules
+cat > /etc/modules <<EOL
+i2c-dev
+spi-bcm2835
+flexfb
+fbtft_device
+EOL
 echo "----------------------------------------------------------------"
 echo "Setup Fullscreen Dashboard"
 echo "----------------------------------------------------------------"
