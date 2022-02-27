@@ -57,7 +57,7 @@ Section "InputClass"
    #Option "TransformationMatrix" "0 1 0 -1 0 1 0 0 1"
    # Don't use libinput but evdev for the touch screen and the pen so calibration works:
    Driver "evdev"
-   Option "Calibration"   "3936 227 268 3880"
+   Option "Calibration"   "60 3723 3896 181"
    Option "InvertY" "true"
  #  #Option "InvertX" "true"
  #  # Right mouse button is long press with pen:
